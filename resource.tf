@@ -15,20 +15,6 @@ locals {
         },
       ]
     },
-    {
-      name = "tiesto"
-      cidr_block = "11.0.0.0/22"
-      subnets = [
-        {
-          name = "tiesto_snet_001"
-          cidr_block = "11.0.0.0/25"
-        },
-        {
-          name = "tiesto_snet_002"
-          cidr_block = "11.0.1.0/25"
-        }
-      ]
-    }
   ]
 
   flat_subnets = flatten([for vpc in local.vpc : [
