@@ -9,10 +9,13 @@ locals {
   ] 
  ])
 
-}
+  flat_vpcs = flatten([ for vpc in var.vpc : {
+    name = vpc.name
+    cidr_block = vpc.cidr_block
+    attach_internet_gateway = vpc.attach_internet_gateway
+    attach_route_table = vpc.attach_route_table
+  } ])
 
-output "subnets" {
-  value = local.flat_subnets
 }
 
 resource "aws_vpc" "main" {
@@ -39,3 +42,21 @@ resource "aws_subnet" "main" {
   }
 }
 
+resource "aws_internet_gateway" "main" {
+  for_each = { for vpc in var.vpc : vpc.name => vpc 
+  if lookup(vpc, "attach_internet_gateway", null)
+    }
+  vpc_id = aws_vpc.main[each.key].id
+}
+
+resource "aws_route_table" "main" {
+  for_each = { for vpc in var.vpc : vpc.name => vpc
+  if lookup(vpc, "attach_route_table", null)
+   }
+  vpc_id = aws_vpc.main[each.key].id
+
+  route {
+    cidr_block = "0.0.0.0/0"
+    gateway_id = aws_internet_gateway.main[each.key].id
+  }
+}
