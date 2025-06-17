@@ -32,22 +32,6 @@ locals {
         }
       ]
     },
-    {
-      name = "this_is_test"
-      cidr_block = "17.0.0.0/22"
-      attach_internet_gateway = false
-      attach_route_table = false
-      subnets = [
-        {
-          name = "test-snet-00A"
-          cidr_block = "17.0.0.0/25"
-        },
-        {
-          name = "test-snet-00B"
-          cidr_block = "17.0.1.0/25"
-        }
-      ]
-    },
   ]
 }
 
@@ -55,10 +39,6 @@ module "release_network" {
   source = "./modules/network"
 
   vpc = local.vpc
-}
-
-output "vpcs" {
-  value = module.release_network.vpcs
 }
 
 output "subnets" {

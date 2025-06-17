@@ -8,14 +8,6 @@ locals {
     }
   ] 
  ])
-
-  flat_vpcs = flatten([ for vpc in var.vpc : {
-    name = vpc.name
-    cidr_block = vpc.cidr_block
-    attach_internet_gateway = vpc.attach_internet_gateway
-    attach_route_table = vpc.attach_route_table
-  } ])
-
 }
 
 resource "aws_vpc" "main" {
