@@ -25,10 +25,12 @@ locals {
         {
           name = "ps-release-can-subnet-001"
           cidr_block = "10.0.0.0/25"
+          public_subnet = true
         },
         {
           name = "ps-release-can-subnet-002"
           cidr_block = "10.0.1.0/25"
+          public_subnet = true
         }
       ]
     },
