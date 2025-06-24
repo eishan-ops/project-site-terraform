@@ -21,6 +21,7 @@ locals {
       cidr_block = "10.0.0.0/22"
       attach_internet_gateway = true
       attach_route_table = true
+      #security_groups = [abc, xyz]
       subnets = [
         {
           name = "ps-release-can-subnet-001"
