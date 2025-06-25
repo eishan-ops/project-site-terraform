@@ -13,3 +13,24 @@ variable "vpc" {
         }))
     }))
 }
+
+variable "subnets" {
+  type = list(object({
+    name = string
+    cidr_block = string
+    vpc_name = string
+    vpc_id = string
+    public_subnet = bool
+    tier = string
+  }))
+}
+
+variable "vms" {
+    type = list(object({
+      name = string
+      vpc_name = string
+      subnet_id = string
+      security_group_id = string
+      tier = string
+    }))  
+}
