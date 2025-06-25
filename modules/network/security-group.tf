@@ -13,7 +13,7 @@ locals {
 
 
 resource "aws_security_group" "allow_tls" {
-  for_each = { for sgs in local.flat_security_groups : sgs.security_group_name => sgs } 
+  for_each = { for security_group in local.flat_security_groups : security_group.security_group_name => security_group } 
   name        = each.key
   description = "something -something"
   vpc_id      = aws_vpc.main[each.value.vpc_name].id

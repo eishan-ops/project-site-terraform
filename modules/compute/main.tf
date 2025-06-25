@@ -1,9 +1,9 @@
-resource "aws_instance" "foo" {
+resource "aws_instance" "main" {
   ami           = "ami-0c0a551d0459e9d39" # us-west-2
   instance_type = "t2.micro"
   associate_public_ip_address = true
   ebs_block_device {
-    device_name = "default"
+    device_name = "/dev/sda1"
     delete_on_termination = true
     iops = "3000"
     throughput = "125"
