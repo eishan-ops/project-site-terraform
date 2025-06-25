@@ -1,4 +1,8 @@
+
+
+
 resource "aws_instance" "main" {
+  for_each = { for vm in var.vms : vm.name => vm }
   ami           = "ami-0c0a551d0459e9d39" # us-west-2
   instance_type = "t2.micro"
   associate_public_ip_address = true
@@ -12,8 +16,9 @@ resource "aws_instance" "main" {
 
   }
   key_name = aws_key_pair.logger.key_name
-  # vpc_security_group_ids = [  ]
-  # subnet_id = 
+  subnet_id = each.value.subnet_id
+  vpc_security_group_ids = [ each.value.security_group_id ]
+  
   
 
 }

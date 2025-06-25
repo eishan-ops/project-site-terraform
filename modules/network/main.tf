@@ -7,6 +7,7 @@ locals {
       vpc_name = vpc.name
       vpc_id = aws_vpc.main[vpc.name].id
       public_subnet = subnet.public_subnet
+      tier = subnet.tier
     }
   ] 
  ])
@@ -34,6 +35,7 @@ resource "aws_subnet" "main" {
     Managed-By = "terraform"
     Env = "release"
     public_subnet = each.value.public_subnet
+    tier = each.value.tier
   }
 }
 

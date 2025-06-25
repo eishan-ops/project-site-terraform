@@ -21,17 +21,19 @@ locals {
       cidr_block = "10.0.0.0/22"
       attach_internet_gateway = true
       attach_route_table = true
-      security_groups = ["abc", "xyz"]
+      security_groups = ["abc", "xyz"]  # shared, # reserve
       subnets = [
         {
           name = "ps-release-can-subnet-001"
           cidr_block = "10.0.0.0/25"
           public_subnet = true
+          tier = "app"
         },
         {
           name = "ps-release-can-subnet-002"
           cidr_block = "10.0.1.0/25"
           public_subnet = true
+          tier = "web"
         }
       ]
     },
