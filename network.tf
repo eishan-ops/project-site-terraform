@@ -21,7 +21,7 @@ locals {
       cidr_block = "10.0.0.0/22"
       attach_internet_gateway = true
       attach_route_table = true
-      security_groups = ["abc", "xyz"]  # shared, # reserve
+      security_groups = ["abc", "xyz"]  # shared, # reserve # example 
       subnets = [
         {
           name = "ps-release-can-subnet-001"
@@ -38,12 +38,105 @@ locals {
       ]
     },
   ]
+
+  security_group_rules = { 
+    "xyz" = [ 
+      {
+          name = "home-to-fastapi"
+          cidr_ipv4 = "x.x.x.x"
+          ip_protocol = "tcp"
+          from_port = 8000
+          to_port = 8000
+      },
+      {
+          name = "office-to-fastapi"
+          cidr_ipv4 = "x.x.x.x"
+          ip_protocol = "tcp"
+          from_port = 8000
+          to_port = 8000
+      },
+      {
+          name = "home-to-nginx"
+          cidr_ipv4 = "x.x.x.x"
+          ip_protocol = "tcp"
+          from_port = 80
+          to_port = 80
+      },
+      {
+          name = "office-to-nginx"
+          cidr_ipv4 = "x.x.x.x"
+          ip_protocol = "tcp"
+          from_port = 80
+          to_port = 80
+      },
+      {
+          name = "home-to-ssh"
+          cidr_ipv4 = "x.x.x.x"
+          ip_protocol = "tcp"
+          from_port = 22
+          to_port = 22
+      },
+      {
+          name = "office-to-ssh"
+          cidr_ipv4 = "x.x.x.x"
+          ip_protocol = "tcp"
+          from_port = 22
+          to_port = 22
+      }
+   ] ,
+    "abc" = [
+      {
+          name = "home-to-fastapi"
+          cidr_ipv4 = "x.x.x.x"
+          ip_protocol = "tcp"
+          from_port = 8000
+          to_port = 8000
+      },
+      {
+          name = "office-to-fastapi"
+          cidr_ipv4 = "x.x.x.x"
+          ip_protocol = "tcp"
+          from_port = 8000
+          to_port = 8000
+      },
+      {
+          name = "home-to-nginx"
+          cidr_ipv4 = "x.x.x.x"
+          ip_protocol = "tcp"
+          from_port = 80
+          to_port = 80
+      },
+      {
+          name = "office-to-nginx"
+          cidr_ipv4 = "x.x.x.x"
+          ip_protocol = "tcp"
+          from_port = 80
+          to_port = 80
+      },
+      {
+          name = "home-to-ssh"
+          cidr_ipv4 = "x.x.x.x"
+          ip_protocol = "tcp"
+          from_port = 22
+          to_port = 22
+      },
+      {
+          name = "office-to-ssh"
+          cidr_ipv4 = "x.x.x.x"
+          ip_protocol = "tcp"
+          from_port = 22
+          to_port = 22
+      }
+    ],
+   }
+
 }
 
 module "release_network" {
   source = "./modules/network"
 
   vpc = local.vpc
+  security_group_rules = local.security_group_rules
 }
 
 output "subnets" {

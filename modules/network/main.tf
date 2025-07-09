@@ -11,6 +11,7 @@ locals {
     }
   ] 
  ])
+
 }
 
 resource "aws_vpc" "main" {
@@ -70,3 +71,4 @@ resource "aws_route_table_association" main {
   subnet_id = aws_subnet.main[each.key].id
   route_table_id = aws_route_table.main[each.value.vpc_name].id   # we do this because , route table resource is 'Keyed' to `var.vpc` and in turn, `vpc.name`
 }
+
