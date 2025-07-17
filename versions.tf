@@ -9,5 +9,5 @@ terraform {
 
 provider "aws" {
   region                   = "ca-central-1"
-  shared_credentials_files = ["C:/Users/Eishan.Rana/Desktop/repos/project-site-terraform/creds.txt"]
+  
 }
