@@ -17,125 +17,125 @@ values can be accessed by each.key and each.value.cidr_block <-- Eg.
 locals {
   vpc = [
     {
-      name = "ps_release_can_vpc_001"
-      cidr_block = "10.0.0.0/22"
+      name                    = "ps-release-can-vpc-001"
+      cidr_block              = "10.0.0.0/22"
       attach_internet_gateway = true
-      attach_route_table = true
-      security_groups = ["abc", "xyz"]  # shared, # reserve # example 
+      attach_route_table      = true
+      security_groups         = ["ps-release-can-sg-shared", "ps-release-can-sg-reserve"] # shared, # reserve # example 
       subnets = [
         {
-          name = "ps-release-can-subnet-001"
-          cidr_block = "10.0.0.0/25"
+          name          = "ps-release-can-subnet-001"
+          cidr_block    = "10.0.0.0/25"
           public_subnet = true
-          tier = "app"
+          tier          = "app"
         },
         {
-          name = "ps-release-can-subnet-002"
-          cidr_block = "10.0.1.0/25"
+          name          = "ps-release-can-subnet-002"
+          cidr_block    = "10.0.1.0/25"
           public_subnet = true
-          tier = "web"
+          tier          = "web"
         }
       ]
     },
   ]
 
-  security_group_rules = { 
-    "xyz" = [ 
+  security_group_rules = {
+    "ps-release-can-sg-shared" = [
       {
-          name = "home-to-fastapi"
-          cidr_ipv4 = "x.x.x.x"
-          ip_protocol = "tcp"
-          from_port = 8000
-          to_port = 8000
+        name        = "home-to-fastapi"
+        cidr_ipv4   = "x.x.x.x"
+        ip_protocol = "tcp"
+        from_port   = 8000
+        to_port     = 8000
       },
       {
-          name = "office-to-fastapi"
-          cidr_ipv4 = "x.x.x.x"
-          ip_protocol = "tcp"
-          from_port = 8000
-          to_port = 8000
+        name        = "office-to-fastapi"
+        cidr_ipv4   = "x.x.x.x"
+        ip_protocol = "tcp"
+        from_port   = 8000
+        to_port     = 8000
       },
       {
-          name = "home-to-nginx"
-          cidr_ipv4 = "x.x.x.x"
-          ip_protocol = "tcp"
-          from_port = 80
-          to_port = 80
+        name        = "home-to-nginx"
+        cidr_ipv4   = "x.x.x.x"
+        ip_protocol = "tcp"
+        from_port   = 80
+        to_port     = 80
       },
       {
-          name = "office-to-nginx"
-          cidr_ipv4 = "x.x.x.x"
-          ip_protocol = "tcp"
-          from_port = 80
-          to_port = 80
+        name        = "office-to-nginx"
+        cidr_ipv4   = "x.x.x.x"
+        ip_protocol = "tcp"
+        from_port   = 80
+        to_port     = 80
       },
       {
-          name = "home-to-ssh"
-          cidr_ipv4 = "x.x.x.x"
-          ip_protocol = "tcp"
-          from_port = 22
-          to_port = 22
+        name        = "home-to-ssh"
+        cidr_ipv4   = "x.x.x.x"
+        ip_protocol = "tcp"
+        from_port   = 22
+        to_port     = 22
       },
       {
-          name = "office-to-ssh"
-          cidr_ipv4 = "x.x.x.x"
-          ip_protocol = "tcp"
-          from_port = 22
-          to_port = 22
-      }
-   ] ,
-    "abc" = [
-      {
-          name = "home-to-fastapi"
-          cidr_ipv4 = "x.x.x.x"
-          ip_protocol = "tcp"
-          from_port = 8000
-          to_port = 8000
-      },
-      {
-          name = "office-to-fastapi"
-          cidr_ipv4 = "x.x.x.x"
-          ip_protocol = "tcp"
-          from_port = 8000
-          to_port = 8000
-      },
-      {
-          name = "home-to-nginx"
-          cidr_ipv4 = "x.x.x.x"
-          ip_protocol = "tcp"
-          from_port = 80
-          to_port = 80
-      },
-      {
-          name = "office-to-nginx"
-          cidr_ipv4 = "x.x.x.x"
-          ip_protocol = "tcp"
-          from_port = 80
-          to_port = 80
-      },
-      {
-          name = "home-to-ssh"
-          cidr_ipv4 = "x.x.x.x"
-          ip_protocol = "tcp"
-          from_port = 22
-          to_port = 22
-      },
-      {
-          name = "office-to-ssh"
-          cidr_ipv4 = "x.x.x.x"
-          ip_protocol = "tcp"
-          from_port = 22
-          to_port = 22
+        name        = "office-to-ssh"
+        cidr_ipv4   = "x.x.x.x"
+        ip_protocol = "tcp"
+        from_port   = 22
+        to_port     = 22
       }
     ],
-   }
+    "ps-release-can-sg-reserve" = [
+      {
+        name        = "home-to-fastapi"
+        cidr_ipv4   = "x.x.x.x"
+        ip_protocol = "tcp"
+        from_port   = 8000
+        to_port     = 8000
+      },
+      {
+        name        = "office-to-fastapi"
+        cidr_ipv4   = "x.x.x.x"
+        ip_protocol = "tcp"
+        from_port   = 8000
+        to_port     = 8000
+      },
+      {
+        name        = "home-to-nginx"
+        cidr_ipv4   = "x.x.x.x"
+        ip_protocol = "tcp"
+        from_port   = 80
+        to_port     = 80
+      },
+      {
+        name        = "office-to-nginx"
+        cidr_ipv4   = "x.x.x.x"
+        ip_protocol = "tcp"
+        from_port   = 80
+        to_port     = 80
+      },
+      {
+        name        = "home-to-ssh"
+        cidr_ipv4   = "x.x.x.x"
+        ip_protocol = "tcp"
+        from_port   = 22
+        to_port     = 22
+      },
+      {
+        name        = "office-to-ssh"
+        cidr_ipv4   = "x.x.x.x"
+        ip_protocol = "tcp"
+        from_port   = 22
+        to_port     = 22
+      }
+    ],
+  }
 
 }
 
 module "release_network" {
   source = "./modules/network"
 
-  vpc = local.vpc
+  vpc                  = local.vpc
   security_group_rules = local.security_group_rules
 }
 
