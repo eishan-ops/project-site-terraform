@@ -43,6 +43,7 @@ locals {
     "ps-release-can-sg-shared" = [
       {
         name        = "home-to-fastapi"
+        type        = "ingress"
         cidr_ipv4   = "x.x.x.x"
         ip_protocol = "tcp"
         from_port   = 8000
@@ -50,6 +51,7 @@ locals {
       },
       {
         name        = "office-to-fastapi"
+        type        = "ingress"
         cidr_ipv4   = "x.x.x.x"
         ip_protocol = "tcp"
         from_port   = 8000
@@ -57,6 +59,7 @@ locals {
       },
       {
         name        = "home-to-nginx"
+        type        = "ingress"
         cidr_ipv4   = "x.x.x.x"
         ip_protocol = "tcp"
         from_port   = 80
@@ -64,6 +67,7 @@ locals {
       },
       {
         name        = "office-to-nginx"
+        type        = "ingress"
         cidr_ipv4   = "x.x.x.x"
         ip_protocol = "tcp"
         from_port   = 80
@@ -71,6 +75,7 @@ locals {
       },
       {
         name        = "home-to-ssh"
+        type        = "ingress"
         cidr_ipv4   = "x.x.x.x"
         ip_protocol = "tcp"
         from_port   = 22
@@ -78,15 +83,23 @@ locals {
       },
       {
         name        = "office-to-ssh"
+        type        = "ingress"
         cidr_ipv4   = "x.x.x.x"
         ip_protocol = "tcp"
         from_port   = 22
         to_port     = 22
+      },
+      {
+        name        = "vm-to-outside"
+        type        = "egress"
+        cidr_ipv4   = "0.0.0.0/0" # internet is needed for downloading packages.
+        ip_protocol = "-1"        # all traffic Egress, in this case ports not required.
       }
     ],
     "ps-release-can-sg-reserve" = [
       {
         name        = "home-to-fastapi"
+        type        = "ingress"
         cidr_ipv4   = "x.x.x.x"
         ip_protocol = "tcp"
         from_port   = 8000
@@ -94,6 +107,7 @@ locals {
       },
       {
         name        = "office-to-fastapi"
+        type        = "ingress"
         cidr_ipv4   = "x.x.x.x"
         ip_protocol = "tcp"
         from_port   = 8000
@@ -101,6 +115,7 @@ locals {
       },
       {
         name        = "home-to-nginx"
+        type        = "ingress"
         cidr_ipv4   = "x.x.x.x"
         ip_protocol = "tcp"
         from_port   = 80
@@ -108,6 +123,7 @@ locals {
       },
       {
         name        = "office-to-nginx"
+        type        = "ingress"
         cidr_ipv4   = "x.x.x.x"
         ip_protocol = "tcp"
         from_port   = 80
@@ -115,6 +131,7 @@ locals {
       },
       {
         name        = "home-to-ssh"
+        type        = "ingress"
         cidr_ipv4   = "x.x.x.x"
         ip_protocol = "tcp"
         from_port   = 22
@@ -122,10 +139,17 @@ locals {
       },
       {
         name        = "office-to-ssh"
+        type        = "ingress"
         cidr_ipv4   = "x.x.x.x"
         ip_protocol = "tcp"
         from_port   = 22
         to_port     = 22
+      },
+      {
+        name        = "vm-to-outside"
+        type        = "egress"
+        cidr_ipv4   = "0.0.0.0/0" # internet is needed for downloading packages.
+        ip_protocol = "-1"        # all traffic Egress, in this case ports not required.
       }
     ],
   }

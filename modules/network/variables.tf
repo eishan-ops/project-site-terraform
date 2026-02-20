@@ -17,9 +17,10 @@ variable "vpc" {
 variable "security_group_rules" {
   type = map(list(object({
     name        = string
+    type        = string
     cidr_ipv4   = string
     ip_protocol = string
-    from_port   = number
-    to_port     = number
+    from_port   = optional(number)
+    to_port     = optional(number)
   })))
 }
