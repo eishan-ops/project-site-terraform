@@ -17,6 +17,7 @@ locals {
   #  so after merge , the structure looks as such : 
   #  {
   #   name        = "home-to-fastapi"
+  #   type        = "ingress"
   #   cidr_ipv4   = "x.x.x.x"
   #   ip_protocol = "tcp"
   #   from_port = 8000
@@ -25,7 +26,7 @@ locals {
   #  }
 
   security_group_rule_map = { for rule in local.flat_security_groups_rules :
-    "${rule.name}-${rule.to_port}-${rule.sg_name}" => rule
+    "${rule.name}-${rule.sg_name}" => rule
   }
 
   # we need to make a map to have a unique object ,
@@ -48,7 +49,16 @@ resource "aws_security_group" "main" {
 }
 
 resource "aws_vpc_security_group_ingress_rule" "main" {
-  for_each          = local.security_group_rule_map
+  for_each          = { for key, rule in local.security_group_rule_map : key => rule if rule.type == "ingress" }
+  cidr_ipv4         = each.value.cidr_ipv4
+  ip_protocol       = each.value.ip_protocol
+  from_port         = each.value.from_port
+  to_port           = each.value.to_port
+  security_group_id = aws_security_group.main[each.value.sg_name].id
+}
+
+resource "aws_vpc_security_group_egress_rule" "main" {
+  for_each          = { for key, rule in local.security_group_rule_map : key => rule if rule.type == "egress" }
   cidr_ipv4         = each.value.cidr_ipv4
   ip_protocol       = each.value.ip_protocol
   from_port         = each.value.from_port

@@ -24,6 +24,6 @@ resource "aws_instance" "main" {
 }
 
 resource "aws_key_pair" "logger" {
-  key_name   = "project-site-logger"
-  public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDTRREzdq/axPbJsK7n1vvjk+HyWLVkqROol0hhsaSAQmVvg/eu06Z4RJeLStLOrzGsn/XifaTmWzg1HrtJljGkW84rsEtWhwHwW+9jg62j/0oDbJoOw3ruVTns3XbEjC/nFr8vuIMWdvuNDqThABx/It2na8Hx5cT1nKY0mKA1B1L8IzCDlvFvaYUExl5G92Lu2EsqxaVwb7J3Q98QzX4/IeTbNuwA8dg9na2z4FRfQlNX9xzPH+tuImYIk4nss6sATmsAsWi2HLmvn4GlH1NOFezr5cbiOL+wihGJ+gVn3CNXyJLfUVkpJcoOqLGfppU/bT9Cw+vqYSOsb6KAI7cH project-site-logger"
+  key_name   = "logger"
+  public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDOsQM+VqXjap1nHQszpeTbeykyFH3fWedyAB2u27NM3iQEsgm2ot9tzzdhouaPbctmCba1TU/4K0CKl+4US7hfYp3aMdu3wMHE1N8K8O3/3vIZ5ZijNDH8my5ocm8DVMyxVdRV0tn+z63NPPGEa4A7irJiWwlcOPIpwIF620/CctmyubOUQYUq8AMerxWTWmQugfUXcO8ezvYDMgsCATXD4fnwHOk33B+8TcB2ie20l5pW7kVegv3WP/WzHVe5C7ocHNegICMdI8Vn32DUPwX86JD6dNAfsNuO9y6a4rp96MxepgrZG62b3td5GKvdUNydeDGTnczVSqQ97rGAS8yB logger"
 }
