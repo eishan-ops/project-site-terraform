@@ -92,8 +92,8 @@ locals {
       {
         name        = "vm-to-outside"
         type        = "egress"
-        cidr_ipv4   = "0.0.0.0/0"         # internet is needed for downloading packages.
-        ip_protocol = "-1"                # all traffic Egress, in this case ports not required.
+        cidr_ipv4   = "0.0.0.0/0" # internet is needed for downloading packages.
+        ip_protocol = "-1"        # all traffic Egress, in this case ports not required.
       }
     ],
     "ps-release-can-sg-reserve" = [
@@ -148,8 +148,8 @@ locals {
       {
         name        = "vm-to-outside"
         type        = "egress"
-        cidr_ipv4   = "0.0.0.0/0"         # internet is needed for downloading packages.
-        ip_protocol = "-1"                # all traffic Egress, in this case ports not required.
+        cidr_ipv4   = "0.0.0.0/0" # internet is needed for downloading packages.
+        ip_protocol = "-1"        # all traffic Egress, in this case ports not required.
       }
     ],
   }
