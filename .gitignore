@@ -9,3 +9,5 @@
 *.tfstate.backup
 
 *.py
+
+*.ppk

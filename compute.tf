@@ -1,18 +1,25 @@
 locals {
   vms = [
     {
-      name              = "ps-release-can-ec2-fastapi"
+      name              = "fastapi-ps-release-can-ec2"
       vpc_name          = "ps-release-can-vpc-001"
       subnet_id         = module.release_network.subnet_ids["ps-release-can-subnet-001"]
       security_group_id = module.release_network.security_group_ids["ps-release-can-sg-shared"]
       tier              = "app"
     },
     {
-      name              = "ps-release-can-ec2-nginx"
+      name              = "nginx-ps-release-can-ec2"
       vpc_name          = "ps-release-can-vpc-001"
       subnet_id         = module.release_network.subnet_ids["ps-release-can-subnet-002"]
       security_group_id = module.release_network.security_group_ids["ps-release-can-sg-reserve"]
       tier              = "web"
+    },
+    {
+      name              = "ansible-ps-release-can-ec2"
+      vpc_name          = "ps-release-can-vpc-002"
+      subnet_id         = module.release_network.subnet_ids["ps-release-can-subnet-002"]
+      security_group_id = module.release_network.security_group_ids["ps-release-can-sg-reserve"]
+      tier              = "management"
     },
   ]
 }
