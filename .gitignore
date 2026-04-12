@@ -13,3 +13,5 @@
 *.ppk
 
 *.pem
+
+*.backup
