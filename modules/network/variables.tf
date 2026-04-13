@@ -4,6 +4,8 @@ variable "vpc" {
     cidr_block              = string
     attach_internet_gateway = bool
     attach_route_table      = bool
+    attach_nat_gateway      = optional(bool, false)
+    nat_subnet_name         = optional(string)
     security_groups         = list(string)
     subnets = list(object({
       name          = string

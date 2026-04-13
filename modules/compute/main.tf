@@ -13,8 +13,13 @@ resource "aws_instance" "main" {
     throughput            = "125"
     volume_size           = "8"
     volume_type           = "gp3"
-
   }
+
+  tags = {
+    Name = each.key
+    Tier = each.value.tier
+  }
+
   key_name               = aws_key_pair.logger.key_name
   subnet_id              = each.value.subnet_id
   vpc_security_group_ids = [each.value.security_group_id]
@@ -25,5 +30,5 @@ resource "aws_instance" "main" {
 
 resource "aws_key_pair" "logger" {
   key_name   = "logger"
-  public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDOsQM+VqXjap1nHQszpeTbeykyFH3fWedyAB2u27NM3iQEsgm2ot9tzzdhouaPbctmCba1TU/4K0CKl+4US7hfYp3aMdu3wMHE1N8K8O3/3vIZ5ZijNDH8my5ocm8DVMyxVdRV0tn+z63NPPGEa4A7irJiWwlcOPIpwIF620/CctmyubOUQYUq8AMerxWTWmQugfUXcO8ezvYDMgsCATXD4fnwHOk33B+8TcB2ie20l5pW7kVegv3WP/WzHVe5C7ocHNegICMdI8Vn32DUPwX86JD6dNAfsNuO9y6a4rp96MxepgrZG62b3td5GKvdUNydeDGTnczVSqQ97rGAS8yB logger"
+  public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCch4LWGFEyzmecfbcWisviMysfVtU6RucmfJORkOlF9S3e6oPU1jLUQTtbXnaczFwWVAVZXvIpfPorRT3TYPH0TwdM6vtQxNy+lPo7dxzaKxM84rJg6TmgAHMcrgR2uaIhYd4XVtIu7Z52BTGxco1RRzcU334VwQBKzKw3ad4fMefVVeu5a2xADlUPyvNdTqVdvPxGkNvwrnMll87+BkF1cgG3fGa2QrOXU0BwQPVAWES2EpOzk7hTrOENUHyySKPHtixmRLxxfPm/cJfoXtqaT+2RbeN76pVonG9QdBJO0i4YvjmyXu6Ajav11864EMto2DoxHeNw8BA5Q7RCWx0j logger"
 }

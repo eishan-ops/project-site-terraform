@@ -20,6 +20,8 @@ locals {
       name                    = "ps-release-can-vpc-001"
       cidr_block              = "10.0.0.0/22"
       attach_internet_gateway = true
+      attach_nat_gateway      = true
+      nat_subnet_name         = "ps-release-can-subnet-001"  # Use a public subnet name from the list below - we will use this subnet to attach the NAT gateway to
       attach_route_table      = true
       security_groups         = ["ps-release-can-sg-shared", "ps-release-can-sg-reserve"] # shared, # reserve # example 
       subnets = [
@@ -34,6 +36,12 @@ locals {
           cidr_block    = "10.0.1.0/25"
           public_subnet = true
           tier          = "web"
+        },
+        {
+          name          = "ps-release-can-subnet-003"
+          cidr_block    = "10.0.2.0/25"
+          public_subnet = false
+          tier          = "app private"
         }
       ]
     },
@@ -92,8 +100,8 @@ locals {
       {
         name        = "vm-to-outside"
         type        = "egress"
-        cidr_ipv4   = "0.0.0.0/0" # internet is needed for downloading packages.
-        ip_protocol = "-1"        # all traffic Egress, in this case ports not required.
+        cidr_ipv4   = "0.0.0.0/0"         # internet is needed for downloading packages.
+        ip_protocol = "-1"                # all traffic Egress, in this case ports not required.
       }
     ],
     "ps-release-can-sg-reserve" = [
@@ -148,8 +156,8 @@ locals {
       {
         name        = "vm-to-outside"
         type        = "egress"
-        cidr_ipv4   = "0.0.0.0/0" # internet is needed for downloading packages.
-        ip_protocol = "-1"        # all traffic Egress, in this case ports not required.
+        cidr_ipv4   = "0.0.0.0/0"         # internet is needed for downloading packages.
+        ip_protocol = "-1"                # all traffic Egress, in this case ports not required.
       }
     ],
   }
